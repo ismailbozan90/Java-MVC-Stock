@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{/layout/layout}">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${pageTitle}">Title</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="container" style="padding-top: 20px;">
+
+        <h3>Product List</h3>
+        <hr>
+        <a th:href="@{/product/add-product}" class="btn btn-primary btn-lg mb-3">Add Product</a>
+
+        <table class="table table-bordered table-striped" style="table-layout: fixed; width: 100%;">
+            <colgroup>
+                <col style="width: 20%;">
+                <col style="width: 10%;">
+                <col style="width: 10%;">
+                <col style="width: 45%;">
+                <col style="width: 15%;">
+            </colgroup>
+            <thead class="table-dark">
+            <tr>
+                <th>Name</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <th>Description</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="product : ${products}">
+                <td th:text="${product.name}" style="word-wrap: break-word;">Name</td>
+                <td th:text="${product.quantity}" style="word-wrap: break-word;">Quantity</td>
+                <td th:text="${product.price}" style="word-wrap: break-word;">Price</td>
+                <td th:text="${product.description}" style="word-wrap: break-word;">Description</td>
+                <td>
+                    <a th:href="@{/product/update-product(productId=${product.id})}" class="btn btn-primary btn-sm">Update</a>
+                    <a th:href="@{/product/deleteProduct(productId=${product.id})}"
+                       class="btn btn-danger btn-sm"
+                       onclick="if (!(confirm('Are you sure you want to delete this product?'))) return false">Delete</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
+        <div>
+            <nav aria-label="...">
+                <ul class="pagination pagination-lg">
+                    <li th:each="i : ${#numbers.sequence(0, products.totalPages - 1)}"
+                        th:class="${i == products.number} ? 'page-item active' : 'page-item'">
+                        <a class="page-link" th:href="@{/products(page=${i}, size=${products.size})}"
+                           th:text="${i + 1}"></a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>

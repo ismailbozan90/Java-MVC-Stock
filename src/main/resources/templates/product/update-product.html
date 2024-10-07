@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{/layout/layout}">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${pageTitle}">Title</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="container" style="padding-top: 20px;">
+
+        <h3>Update Product</h3>
+        <hr>
+        <form action="#" th:action="@{/product/updateProduct}" th:object="${product}" method="post">
+
+            <div th:if="${success != null}" class="alert alert-success">
+                <span th:text="${success}"></span>
+            </div>
+
+            <div th:if="${error != null} and !${#fields.hasErrors('*')}" class="alert alert-danger">
+                <ul>
+                    <li th:each="err : ${error}" th:text="${err}"></li>
+                </ul>
+            </div>
+
+            <div th:if="${#fields.hasErrors('*')}" class="alert alert-danger">
+                <ul>
+                    <li th:each="err : ${#fields.errors('*')}" th:text="${err}"></li>
+                </ul>
+            </div>
+            <input type="hidden" th:field="*{id}">
+            <input type="number" th:field="*{name}" placeholder="Product Name" class="form-control mb-4 w-25" required>
+            <input type="number" th:field="*{quantity}" placeholder="Quantity" class="form-control mb-4 w-25" required>
+            <input type="text" th:field="*{price}" placeholder="Price" class="form-control mb-4 w-25" required>
+            <textarea name="description" th:field="*{description}" class="form-control mb-4 w-25" required> </textarea>
+            <button type="submit" class="btn btn-primary btn-lg mb-3">Update</button>
+        </form>
+        <hr>
+        <a th:href="@{/products}">Back to Product List</a>
+
+    </div>
+
+</div>
+</body>
+</html>

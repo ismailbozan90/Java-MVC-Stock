@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{/layout/layout}">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${pageTitle}">Title</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="container" style="padding-top: 50px;">
+        <form action="#" th:action="@{authenticateTheUser}" method="post">
+            <h4>Login</h4>
+            <hr>
+            <div th:if="${param.error}">
+                <div class="alert alert-danger" role="alert">
+                    Username or password wrong!
+                </div>
+            </div>
+
+            <div th:if="${param.logout}">
+                <div class="alert alert-success" role="alert">
+                    You successfully logout!
+                </div>
+            </div>
+
+            <!-- Email input -->
+            <div data-mdb-input-init class="form-outline mb-4">
+                <input type="text" id="form2Example1" class="form-control" name="username" />
+                <label class="form-label" for="form2Example1">Username</label>
+            </div>
+
+            <!-- Password input -->
+            <div data-mdb-input-init class="form-outline mb-4">
+                <input type="password" id="form2Example2" class="form-control" name="password" />
+                <label class="form-label" for="form2Example2">Password</label>
+            </div>
+
+            <!-- Submit button -->
+            <button type="submit" data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-block mb-4" value="login">Login</button>
+
+
+        </form>
+    </div>
+
+</div>
+</body>
+</html>

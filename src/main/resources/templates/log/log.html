@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{/layout/layout}">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${pageTitle}">Title</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="container" style="padding-top: 20px;">
+
+        <h3>Log List</h3>
+        <hr>
+
+        <table class="table table-bordered table-striped" style="table-layout: fixed; width: 100%;">
+            <colgroup>
+                <col style="width: 20%;">
+                <col style="width: 20%;">
+                <col style="width: 60%;">
+            </colgroup>
+            <thead class="table-dark">
+            <tr>
+                <th>Name</th>
+                <th>Date</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="log : ${logs}">
+                <td th:text="${log.user.username}" style="word-wrap: break-word;">Name</td>
+                <td th:text="${log.date}" style="word-wrap: break-word;">Quantity</td>
+                <td th:text="${log.action}" style="word-wrap: break-word;">Price</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+</div>
+</body>
+</html>
