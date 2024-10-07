@@ -48,7 +48,7 @@
 
         <div>
             <nav aria-label="...">
-                <ul class="pagination pagination-lg">
+                <ul class="pagination pagination-sm justify-content-center" >
                     <li th:each="i : ${#numbers.sequence(0, products.totalPages - 1)}"
                         th:class="${i == products.number} ? 'page-item active' : 'page-item'">
                         <a class="page-link" th:href="@{/products(page=${i}, size=${products.size})}"
